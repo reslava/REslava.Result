@@ -8,10 +8,11 @@ public class Success : ISuccess
 
     protected Success ()
     {
-        Metadata = new Dictionary<string, object> ();
+        Metadata = [];
+        Message = string.Empty;
     }
 
-    public Success (string message)
+    public Success (string message) : this ()
     {
         Message = message;
     }

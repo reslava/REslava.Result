@@ -12,13 +12,14 @@ public class Error : IError
 
     public List<IError> Reasons { get; }
     
-    protected Error ()
+    protected Error () 
     {
-        Metadata = new Dictionary<string, object> ();
-        Reasons = new List<IError> ();
+        Metadata = [];
+        Reasons = [];
+        Message = string.Empty;
     }    
 
-    public Error (string message)
+    public Error (string message) : this ()
     {
         Message = message;
     }

@@ -17,3 +17,26 @@ Console.WriteLine (r.IsSuccess);
 
 var s = Result.Fail("asdasd");
 
+var rv = Result<int>.Ok ("Correct");
+r = Result.Ok ();
+if (r.IsSuccess)
+    Console.WriteLine (r.IsSuccess);
+else
+    Console.WriteLine ("nooorr");
+
+Result errorResult1 = Result.Fail ("My error message");
+Result errorResult2 = Result.Fail (new Error ("My error message"));
+//Result errorResult3 = Result.Fail (new StartDateIsAfterEndDateError (startDate, endDate));
+Result errorResult4 = Result.Fail (new List<string> { "Error 1", "Error 2" });
+Result errorResult5 = Result.Fail (["Error 1", "Error 2" ]);
+Result errorResult6 = Result.Fail ([ new Error ("Error A"), new Error ("Error B")]);
+
+Console.WriteLine (errorResult5);
+Console.WriteLine (errorResult5);
+
+// create a result which indicates success
+Result<int> successResult1 = Result.Ok (42);
+Result<MyCustomObject> successResult2 = Result.Ok (new MyCustomObject ());
+
+// create a result which indicates failure
+Result<int> errorResult = Result.Fail<int> ("My error message");

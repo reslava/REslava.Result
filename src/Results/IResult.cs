@@ -13,8 +13,8 @@ public interface IResult
     IReadOnlyList<IError> Errors { get; }
     IReadOnlyList<ISuccess> Successes { get; }
 
-    public void WithReason (IReason reason) { Reasons.Add (reason); }
-    public void WithReasons (IEnumerable<IReason> reasons) { Reasons.AddRange(reasons)); }
+    IResult WithReason (IReason reason) { Reasons.Add (reason); return this; }
+    IResult WithReasons (IEnumerable<IReason> reasons) { Reasons.AddRange(reasons); return this; }
 }
 
 public interface IResult<out TValue>: IResult

@@ -25,8 +25,30 @@ public partial class Result : IResult
 }
 
 public partial class Result<TValue> : Result, IResult<TValue>
-{
-    public TValue Value => Value;
-
-    public TValue ValueOrDefault => ValueOrDefault;    
+{    
+    public TValue ValueOrDefault { get; private set; }
+    public TValue Value
+    {
+        get
+        {
+            ThrowIfFailed ();
+            if (ValueOrDefault is null)
+                throw new NullReferenceException ();
+            return ValueOrDefault;
+        } 
+        private set
+        {
+            ValueOrDefault = value;
+        }
+    }
+    public Result ()
+    {        
+    }
+    
+    private void ThrowIfFailed ()
+    {
+        if (IsFailed)
+            throw new InvalidOperationException (
+                $"Result is in status failed. Value is not set.");
+    }
 }
