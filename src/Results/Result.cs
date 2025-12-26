@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
 namespace REsl.Result;
 
-public class Result : IResult
+public partial class Result : IResult
 {
     public bool IsSuccess => !IsFailed;
 
@@ -20,10 +21,10 @@ public class Result : IResult
     public Result ()
     {
         Reasons = new List<IReason> ();
-    }
+    }    
 }
 
-public class Result<TValue> : Result, IResult<TValue>
+public partial class Result<TValue> : Result, IResult<TValue>
 {
     public TValue Value => Value;
 
