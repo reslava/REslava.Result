@@ -16,3 +16,4 @@ r = Result.Ok ("Correct");
 Console.WriteLine (r.IsSuccess);
 
 var s = Result.Fail("asdasd");
+

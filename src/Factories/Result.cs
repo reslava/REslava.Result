@@ -20,9 +20,10 @@ public partial class Result
         return result;
     }
 
-    public Result WithReason (IReason reason)
-    {
-        Reasons.Add (reason);
-        return this;
-    }
+    //public static Result WithReason (IReason reason)
+    //{
+    //    var result = new Result ();
+    //    result.Reasons.Add (reason);
+    //    return result;
+    //}
 }

@@ -10,7 +10,7 @@ public partial class Result : IResult
 {
     public bool IsSuccess => !IsFailed;
 
-    public bool IsFailed => Reasons.OfType<IError> ().Any ();    
+    public bool IsFailed => Reasons.OfType<IError> ().Any ();
 
     public List<IReason> Reasons { get; }
 
@@ -28,5 +28,5 @@ public partial class Result<TValue> : Result, IResult<TValue>
 {
     public TValue Value => Value;
 
-    public TValue ValueOrDefault => ValueOrDefault;
+    public TValue ValueOrDefault => ValueOrDefault;    
 }
