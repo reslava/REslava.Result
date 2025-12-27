@@ -14,6 +14,7 @@ public class Success : ISuccess
     public Success (string message) : this ()
     {
         Message = message;
-    }
-    public ISuccess WithMetadata (string key, object value) { Metadata.Add (key, value); return this; }
+    }    
+    
+    public ISuccess WithMetadata (string key, object value) { Metadata.Add (key, value); return (ISuccess)this; }
 }

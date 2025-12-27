@@ -8,6 +8,7 @@ Result DoSomething ()
     return Result.Fail ("Error ocurred");
 }
 
+
 var r = DoSomething ();
 Console.WriteLine (r.IsSuccess);
 
@@ -41,8 +42,20 @@ Result errorResult6 = Result.Fail ([ new Error ("Error A"), new Error ("Error B"
 
 var result = Result.Fail (new Error("error message 1").WithMetadata ("10", "chungo"))
                    .WithError ("error message 2")
-                   .WithSuccess ("success message 1");                   
-        
+                   .WithSuccess ("success message 1");
 
-Console.WriteLine (errorResult5);
-Console.WriteLine (errorResult5);
+var result1 = Result.Fail (new Error ("Error 1").WithMetadata ("metadata name", "metadata value"));
+
+var result2 = Result.Ok ()
+                    .WithSuccess (new Success ("Success 1").WithMetadata ("metadata name", "metadata value"));
+
+result = Result.Ok ();
+
+public class DomainError : Error
+{
+    public DomainError (string message)
+        : base (message)
+    {
+        WithMetadata ("ErrorCode", "12");
+    }
+}

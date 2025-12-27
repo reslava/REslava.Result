@@ -16,6 +16,6 @@ public class Error : IError
     {
         Message = message;
     }
-    public IError WithMetadata (string key, object value) { Metadata.Add (key, value); return this; }
+    public IError WithMetadata (string key, object value) { Metadata.Add (key, value); return (IError) this; }
 }
 
