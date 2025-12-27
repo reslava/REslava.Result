@@ -8,13 +8,14 @@ public class Error : IError
     
     protected Error ()
     {
-        Metadata = [];
-        Reasons = [];
         Message = string.Empty;
-    }   
+        Metadata = [];
+        Reasons = [];        
+    }
     public Error (string message) : this ()
     {
         Message = message;
-    }    
+    }
+    public IError WithMetadata (string key, object value) { Metadata.Add (key, value); return this; }
 }
 

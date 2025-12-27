@@ -1,8 +1,9 @@
-﻿namespace REsl.Result;
+﻿
+namespace REsl.Result;
 
-public class Success : ISuccess 
+public class Success : ISuccess
 {
-    public string Message { get; protected set; }
+    public string Message { get; }
     public Dictionary<string, object> Metadata { get; }
 
     protected Success ()
@@ -14,4 +15,5 @@ public class Success : ISuccess
     {
         Message = message;
     }
+    public ISuccess WithMetadata (string key, object value) { Metadata.Add (key, value); return this; }
 }

@@ -31,12 +31,18 @@ Result errorResult4 = Result.Fail (new List<string> { "Error 1", "Error 2" });
 Result errorResult5 = Result.Fail (["Error 1", "Error 2" ]);
 Result errorResult6 = Result.Fail ([ new Error ("Error A"), new Error ("Error B")]);
 
+
+//// create a result which indicates success
+//Result<int> successResult1 = Result.Ok (42);
+//Result<MyCustomObject> successResult2 = Result.Ok (new MyCustomObject ());
+
+//// create a result which indicates failure
+//Result<int> errorResult = Result.Fail<int> ("My error message");
+
+var result = Result.Fail (new Error("error message 1").WithMetadata ("10", "chungo"))
+                   .WithError ("error message 2")
+                   .WithSuccess ("success message 1");                   
+        
+
 Console.WriteLine (errorResult5);
 Console.WriteLine (errorResult5);
-
-// create a result which indicates success
-Result<int> successResult1 = Result.Ok (42);
-Result<MyCustomObject> successResult2 = Result.Ok (new MyCustomObject ());
-
-// create a result which indicates failure
-Result<int> errorResult = Result.Fail<int> ("My error message");

@@ -6,12 +6,18 @@ public partial class Result : IResult
     public bool IsFailed => Reasons.OfType<IError> ().Any ();
     public List<IReason> Reasons { get; }
     public IReadOnlyList<IError> Errors => Reasons.OfType<IError> ().ToList ();
-    public IReadOnlyList<ISuccess> Successes => Reasons.OfType<ISuccess> ().ToList ();    
-    
+    public IReadOnlyList<ISuccess> Successes => Reasons.OfType<ISuccess> ().ToList ();        
+
     public Result ()
     {
         Reasons = [];
-    }    
+    }
+    public IResult WithReason (IReason reason) { Reasons.Add (reason); return this; }
+    public IResult WithReasons (IEnumerable<IReason> reasons) { Reasons.AddRange (reasons); return this; }
+    public IResult WithError (string message) { Reasons.Add (new Error (message)); return this; }
+    public IResult WithErrors (IEnumerable<IError> errors) { Reasons.AddRange (errors); return this; }
+    public IResult WithSuccess (string message) { Reasons.Add (new Success (message)); return this; }
+    public IResult WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange (sucesses); return this; }
 }
 
 public partial class Result<TValue> : Result, IResult<TValue>
