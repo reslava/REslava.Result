@@ -18,7 +18,18 @@ Console.WriteLine (r.IsSuccess);
 
 var s = Result.Fail("asdasd");
 
-var rv = Result<int>.Ok ("Correct");
+var rv = Result<int>.Ok (33).WithSuccess("correcto");
+rv = Result<float>.Ok ("a ver").WithValue(66);
+rv = Result<float>.Ok (77).WithValue (66);
+
+
+// Trying WithMessage fails and I am going to change classes structure model
+// rv = Result<float>.Ok (77).WithMessage ("pufff");
+
+
+//rv = Result.Ok ().WithMessage ("hola");
+rv = Result.Ok ().WithSuccess ("hola");
+
 r = Result.Ok ();
 if (r.IsSuccess)
     Console.WriteLine (r.IsSuccess);
@@ -47,7 +58,7 @@ var result = Result.Fail (new Error("error message 1").WithMetadata ("10", "chun
 var result1 = Result.Fail (new Error ("Error 1").WithMetadata ("metadata name", "metadata value"));
 
 var result2 = Result.Ok ()
-                    .WithSuccess (new Success ("Success 1").WithMetadata ("metadata name", "metadata value"));
+                    .WithSuccess ((ISuccess)new Success ("Success 1").WithMetadata ("metadata name", "metadata value"));
 
 result = Result.Ok ();
 

@@ -12,14 +12,17 @@ public partial class Result : IResult
     {
         Reasons = [];
     }
-    //public IResult WithReason (IReason reason) { Reasons.Add (reason); return this; }
-    //public IResult WithReasons (IEnumerable<IReason> reasons) { Reasons.AddRange (reasons); return this; }
+    public IResult WithMessage (string message) 
+    {
+        Reasons.ElementAt(0).WithMessage(message);
+        return this; 
+    }
     public IResult WithSuccess (string message) { Reasons.Add (new Success (message)); return this; }
-    public IResult WithSuccess (ISuccess success) { Reasons.Add (success); return this; }
-    public IResult WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange (sucesses); return this; }
+    public IResult WithSuccess (ISuccess success) { Reasons.Add ((IReason)success); return this; }
+    public IResult WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange ((IReason)sucesses); return this; }
     public IResult WithError (string message) { Reasons.Add (new Error (message)); return this; }
-    public IResult WithError (IError error) { Reasons.Add (error); return this; }
-    public IResult WithErrors (IEnumerable<IError> errors) { Reasons.AddRange (errors); return this; }    
+    public IResult WithError (IError error) { Reasons.Add ((IReason)error); return this; }
+    public IResult WithErrors (IEnumerable<IError> errors) { Reasons.AddRange ((IReason)errors); return this; }    
 }
 
 public partial class Result<TValue> : Result, IResult<TValue>
@@ -43,4 +46,5 @@ public partial class Result<TValue> : Result, IResult<TValue>
         if (IsFailed)
             throw new InvalidOperationException ($"Result is in status failed. Value is not set.");
     }
+    public IResult WithValue (TValue value) { Value = value; return this; }
 }

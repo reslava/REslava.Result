@@ -21,7 +21,7 @@ public partial class Result
         return result;
     }
 
-    public static Result Fail (IError error)
+    public static Result Fail (IReason error)
     {
         var result = new Result ();
         result.Reasons.Add (error);
@@ -51,20 +51,6 @@ public partial class Result
         result.Reasons.AddRange (errors);
         return result;
     }
-
-    public static Result Fail (List<Error> errors)
-    {
-        var result = new Result ();
-        result.Reasons.AddRange (errors);
-        return result;
-    }
-
-    //public static Result WithReason (IReason reason)
-    //{
-    //    var result = new Result ();
-    //    result.Reasons.Add (reason);
-    //    return result;
-    //}
 }
 
 public partial class Result<TValue>
@@ -85,6 +71,7 @@ public partial class Result<TValue>
     public static new Result<TValue> Fail (string message)
     {
         var result = new Result<TValue> ();
+        //result.Reasons.Add (new Error (message));
         result.Reasons.Add (new Error (message));
         return result;
     }

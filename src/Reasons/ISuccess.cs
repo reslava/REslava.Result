@@ -1,3 +1,3 @@
 ﻿namespace REsl.Result;
 
-public interface ISuccess : IReason;
+public interface ISuccess { };
