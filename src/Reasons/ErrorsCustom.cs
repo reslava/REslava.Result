@@ -1,4 +1,4 @@
-﻿namespace REsl.Result;
+﻿namespace REslava.Result;
 
 public class StartDateIsAfterEndDateError : Error
 {

@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using REsl.Result;
+using REslava.Result;
 
 Console.WriteLine ("Hello, World!");
 

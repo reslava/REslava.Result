@@ -1,5 +1,4 @@
-﻿
-namespace REsl.Result;
+﻿namespace REslava.Result;
 
 public class Success : Reason<Success>, ISuccess
 {

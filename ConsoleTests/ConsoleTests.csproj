@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\REsl.Result.csproj" />
+    <ProjectReference Include="..\src\REslava.Result.csproj" />
   </ItemGroup>
 
 </Project>

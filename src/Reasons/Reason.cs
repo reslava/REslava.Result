@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace REsl.Result;
+﻿namespace REslava.Result;
 
 public abstract class Reason : IReason
 {

@@ -1,4 +1,4 @@
-﻿namespace REsl.Result;
+﻿namespace REslava.Result;
 
 public class Error : Reason<Error>, IError
 {

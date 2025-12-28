@@ -1,3 +1,3 @@
-﻿namespace REsl.Result;
+﻿namespace REslava.Result;
 
 public interface IError { }
