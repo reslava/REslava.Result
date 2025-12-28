@@ -6,4 +6,6 @@ public interface IReason
     Dictionary<string, object> Metadata { get; }
 
     IReason WithMessage (string message);
+    IReason WithMetadata (string key, object value);
+    IReason WithMetadata (Dictionary<string, object> metadata);
 }

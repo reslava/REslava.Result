@@ -1,8 +1,8 @@
 ﻿
 namespace REsl.Result;
 
-public class Success : Reason, ISuccess
+public class Success : Reason<Success>, ISuccess
 {
-    public Success() : base () { }
-    public Success(string message) : base (message) { }
+    public Success () : base () { } 
+    public Success (string message) : base (message) { }
 }

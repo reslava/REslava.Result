@@ -1,8 +1,8 @@
 ﻿namespace REsl.Result;
 
-public class Error : Reason, IError
+public class Error : Reason<Error>, IError
 {
-    public Error() : base () { }
-    public Error(string message) : base (message) { }
+    public Error () : base () { }
+    public Error (string message) : base (message) { }
 }
 

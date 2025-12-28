@@ -4,9 +4,9 @@ using System.Text;
 
 namespace REsl.Result;
 
-public class Reason : IReason
+public abstract class Reason : IReason
 {
-    public string Message { get; private set; }
+    public string Message { get; protected set; }
     public Dictionary<string, object> Metadata { get; }
 
     protected Reason ()
@@ -26,5 +26,17 @@ public class Reason : IReason
             Metadata.Add (metadataItem.Key, metadataItem.Value);
 
         return this;
+    }
+}
+
+public abstract class Reason<TReason> : Reason
+        where TReason : Reason<TReason>
+{
+    public Reason ()
+    {
+    }
+    public Reason (string message)
+    {
+        this.Message = message;
     }
 }

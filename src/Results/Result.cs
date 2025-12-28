@@ -17,10 +17,10 @@ public partial class Result : IResult
         Reasons.ElementAt(0).WithMessage(message);
         return this; 
     }
-    public IResult WithSuccess (string message) { Reasons.Add (new Success (message)); return this; }
+    public IResult WithSuccess (string message) { Reasons.Add (new Success().WithMessage (message)); return this; }
     public IResult WithSuccess (ISuccess success) { Reasons.Add ((IReason)success); return this; }
     public IResult WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange ((IReason)sucesses); return this; }
-    public IResult WithError (string message) { Reasons.Add (new Error (message)); return this; }
+    public IResult WithError (string message) { Reasons.Add (new Error().WithMessage (message)); return this; }
     public IResult WithError (IError error) { Reasons.Add ((IReason)error); return this; }
     public IResult WithErrors (IEnumerable<IError> errors) { Reasons.AddRange ((IReason)errors); return this; }    
 }
