@@ -46,5 +46,5 @@ public partial class Result<TValue> : Result, IResult<TValue>
         if (IsFailed)
             throw new InvalidOperationException ($"Result is in status failed. Value is not set.");
     }
-    public IResult WithValue (TValue value) { Value = value; return this; }
+    public IResult<TValue> WithValue (TValue value) { Value = value; return this; }
 }

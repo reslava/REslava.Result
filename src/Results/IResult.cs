@@ -19,7 +19,7 @@ public interface IResult
     IResult WithErrors (IEnumerable<IError> errors);
 }
 
-public interface IResult<out TValue>: IResult
+public interface IResult <out TValue> : IResult
 {
     TValue? Value { get; }
     TValue? ValueOrDefault { get; }

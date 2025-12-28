@@ -21,6 +21,7 @@ Console.WriteLine (r.IsSuccess);
 var s = Result.Fail ("asdasd");
 
 var rv = Result<int>.Ok (33).WithSuccess ("correcto");
+
 rv = Result<float>.Ok ("a ver").WithValue (66);
 rv = Result<float>.Ok (77).WithValue (66);
 
