@@ -16,6 +16,13 @@ public class Error : IError
     {
         Message = message;
     }
-    public IError WithMetadata (string key, object value) { Metadata.Add (key, value); return (IError) this; }
+    public Error WithMetadata (string key, object value) { Metadata.Add (key, value); return this; }
+    public Error WithMetadata (Dictionary<string, object> metadata)
+    {
+        foreach (var metadataItem in metadata)        
+            Metadata.Add (metadataItem.Key, metadataItem.Value);        
+
+        return this;
+    }
 }
 

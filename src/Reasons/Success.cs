@@ -16,5 +16,12 @@ public class Success : ISuccess
         Message = message;
     }    
     
-    public ISuccess WithMetadata (string key, object value) { Metadata.Add (key, value); return (ISuccess)this; }
+    public Success WithMetadata (string key, object value) { Metadata.Add (key, value); return this; }
+    public Success WithMetadata (Dictionary<string, object> metadata)
+    {
+        foreach (var metadataItem in metadata)        
+            Metadata.Add (metadataItem.Key, metadataItem.Value);        
+
+        return this;
+    }
 }
