@@ -20,10 +20,12 @@
 - [References](#-references)
 
 ## 🎯 Overview
-**REslava.Result** provides a functional approach to error handling in C# by implementing the Result pattern. Instead of throwing exceptions for expected error cases, this library allows you to return rich error information alongside your data, making your code more predictable and easier to reason about.
+**REslava.Result** provides a functional approach to error handling in C# by implementing the Result pattern. Instead of throwing exceptions for expected error cases, this library allows you to return detailed information about the error along with your data, making your code more predictable and easier to understand.
 
-After study ErrorOr and FluentResults libraries and their approaches to implement the Result pattern I decided that I will start a new library from scratch based on FluentResults. 
-I like to start from a blank project cause this way I decide my own classes structure.
+After studying the excellent ErrorOr and FluentResults libraries (many thanks to the authors of both) and their approaches to implementing the Result pattern, I decided to start a new library from scratch based on FluentResults. 
+I like to start from a blank project because that way I can design my own class structure and implement the features I consider appropriate. 
+
+My idea is to make this library as simple as possible, easy to understand and use.
 
 I hope you find this library useful. Thank you!
 
