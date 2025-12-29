@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using REslava.Result;
+using System.Net.WebSockets;
 
 Console.WriteLine ("Hello, World!");
 
@@ -91,6 +92,9 @@ resultFail = Result.Fail ([new Error ("error1"), new Error ("error2")]);
 resultFail = resultFail.WithError("error3");
 
 // NO DEBE COMPILAR resultFail = Result.Fail (new Success ("success1"));
+var dm = new DomainError ("domain");
+var rd = Result.Fail(dm).WithError(dm);
+Console.WriteLine (rd.ToString ());
 
 public class DomainError : Error
 {
