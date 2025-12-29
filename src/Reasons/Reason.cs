@@ -27,10 +27,10 @@ public abstract class Reason : IReason
     public override string ToString ()
     {
         var tagsString = Tags.Any () ?
-            $"{nameof (Tags)}: {string.Join (", ", Tags)}":
+            $" {nameof (Tags)}: {string.Join (", ", Tags)}":
             string.Empty;
 
-        return $"{GetType().Name}: {Message}{string.Join ("; ", Tags)}";            
+        return $"{GetType().Name}: {Message}{tagsString}";            
     }       
 }
 

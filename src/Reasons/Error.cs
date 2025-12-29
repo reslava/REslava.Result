@@ -2,7 +2,7 @@
 
 public class Error : Reason<Error>, IError
 {
-    public Error () : base () { }
+    protected Error () : base () { }
     public Error (string message) : base (message) { }
 }
 

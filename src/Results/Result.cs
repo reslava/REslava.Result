@@ -1,4 +1,6 @@
-﻿namespace REslava.Result;
+﻿using static REslava.Result.Result;
+
+namespace REslava.Result;
 
 public partial class Result : IResult
 {
@@ -12,22 +14,18 @@ public partial class Result : IResult
     {
         Reasons = [];
     }
-    public IResult WithMessage (string message) 
-    {        
-        Reasons.First().WithMessage(message);
-        return this; 
-    }
-    public IResult WithSuccess (string message) { Reasons.Add (new Success().WithMessage (message)); return this; }
-    public IResult WithSuccess (ISuccess success) { Reasons.Add ((IReason)success); return this; }
-    public IResult WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange ((IReason)sucesses); return this; }
-    public IResult WithError (string message) { Reasons.Add (new Error().WithMessage (message)); return this; }
-    public IResult WithError (IError error) { Reasons.Add ((IReason)error); return this; }
-    public IResult WithErrors (IEnumerable<IError> errors) { Reasons.AddRange ((IReason)errors); return this; }
+        
+    public Result WithSuccess (string message) { Reasons.Add (new Success (message)); return this; }
+    public Result WithSuccess (IReason success) { Reasons.Add ((IReason)success); return this; }
+    public Result WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange ((IReason)sucesses); return this; }
+    public Result WithError (string message) { Reasons.Add (new Error (message)); return this; }
+    public Result WithError (IError error) { Reasons.Add ((IReason)error); return this; }
+    public Result WithErrors (IEnumerable<IError> errors) { Reasons.AddRange ((IReason)errors); return this; }
 
     public override string ToString ()
     {
         var reasonsString = Reasons.Any ()
-                                ? $", Reasons='{string.Join ("; ", Reasons)}'"
+                                ? $", Reasons={string.Join ("; ", Reasons)}"
                                 : string.Empty;
 
         return $"Result: IsSuccess='{IsSuccess}'{reasonsString}";
@@ -55,7 +53,7 @@ public partial class Result<TValue> : Result, IResult<TValue>
         if (IsFailed)
             throw new InvalidOperationException ($"Result is in status failed. Value is not set.");
     }
-    public IResult<TValue> WithValue (TValue value) { Value = value; return this; }
+    public Result<TValue> WithValue (TValue value) { Value = value; return this; }
 
     public override string ToString ()
     {

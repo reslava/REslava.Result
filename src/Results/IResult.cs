@@ -8,15 +8,15 @@ public interface IResult
     IReadOnlyList<IError> Errors { get; }
     IReadOnlyList<ISuccess> Successes { get; }
 
-    //IResult WithReason (IReason reason);
-    //IResult WithReasons (IEnumerable<IReason> reasons);
+    ////IResult WithReason (IReason reason);
+    ////IResult WithReasons (IEnumerable<IReason> reasons);
 
-    IResult WithSuccess (string message);
-    IResult WithSuccess (ISuccess success);    
-    IResult WithSuccesses (IEnumerable<ISuccess> successes);
-    IResult WithError (string message);
-    IResult WithError (IError error);
-    IResult WithErrors (IEnumerable<IError> errors);
+    //IResult WithSuccess (string message);
+    //IResult WithSuccess (IReason success);    
+    //IResult WithSuccesses (IEnumerable<ISuccess> successes);
+    //IResult WithError (string message);
+    //IResult WithError (IError error);
+    //IResult WithErrors (IEnumerable<IError> errors);
 }
 
 public interface IResult <out TValue> : IResult

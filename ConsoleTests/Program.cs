@@ -4,8 +4,11 @@ using REslava.Result;
 Console.WriteLine ("Hello, World!");
 
 var cs = new Success ("hola").WithTags("ErrorCode", 12);
-Console.WriteLine (cs.ToString ());
+var res = Result.Ok ().WithSuccess(cs);
+Console.WriteLine (res.ToString ());
 
+res = Result.Fail ("Error").WithSuccess (cs);
+Console.WriteLine (res.ToString ());
 cs = new Success ("");
 Result DoSomething ()
 {
@@ -23,6 +26,8 @@ Console.WriteLine (r.IsSuccess);
 var s = Result.Fail ("asdasd");
 
 var rv = Result<int>.Ok (33).WithSuccess ("correcto");
+
+rv = Result<float>.Ok ("h").WithSuccess ("correcto");
 
 rv = Result<float>.Ok ("a ver").WithValue (66);
 Console.WriteLine (rv.ToString());
@@ -43,7 +48,7 @@ else
 Console.WriteLine ("nooorr");
 
 Result errorResult1 = Result.Fail ("My error message");
-Result errorResult2 = Result.Fail (new Error ().WithMessage("My error message"));
+
 Result errorResult32 = Result.Fail (new Error ("My error message"));
 //Result errorResult3 = Result.Fail (new StartDateIsAfterEndDateError (startDate, endDate));
 Result errorResult4 = Result.Fail (new List<string> { "Error 1", "Error 2" });
@@ -67,13 +72,27 @@ Result errorResult5 = Result.Fail (["Error 1", "Error 2"]);
 //!var result2 = Result.Ok ()
 //!                    .WithSuccess ((ISuccess)new Success ("Success 1").WithMetadata ("metadata name", "metadata value"));
 
+//***********************************************************
+// Result instanciate
 var resultOK = Result.Ok ();
+resultOK = Result.Ok ("success");
+resultOK = resultOK.WithError ("error3");
+Console.WriteLine(resultOK.ToString ());
+
+var resultFail = Result.Fail ("error");
+resultFail = Result.Fail (["error1", "error2"]);
+resultFail = Result.Fail (new Error("error1"));
+resultFail = Result.Fail ([new Error ("error1"), new Error ("error2")]);
+
+resultFail = resultFail.WithError("error3");
+
+// NO DEBE COMPILAR resultFail = Result.Fail (new Success ("success1"));
 
 public class DomainError : Error
 {
     public DomainError (string message)   
     {
-        WithMessage (message);
+        base.Message = message;
         WithTags ("ErrorCode", "12");
     }
 }

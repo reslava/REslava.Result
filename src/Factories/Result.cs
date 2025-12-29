@@ -10,18 +10,18 @@ public partial class Result
     public static Result Ok (string message)
     {
         var result = new Result ();        
-        result.Reasons.Add(new Success().WithMessage(message));
+        result.Reasons.Add(new Success (message));
         return result;
     }   
 
     public static Result Fail (string message)
     {
         var result = new Result ();
-        result.Reasons.Add (new Error ().WithMessage(message));
+        result.Reasons.Add (new Error (message));
         return result;
     }
 
-    public static Result Fail (IReason error)
+    public static Result Fail (Error error)
     {
         var result = new Result ();
         result.Reasons.Add (error);
@@ -36,7 +36,7 @@ public partial class Result
             throw new ArgumentException ("The error messages list can not be empty", nameof (messages));
 
         var result = new Result ();
-        result.Reasons.AddRange (messages.Select(errorMessage => new Error ().WithMessage(errorMessage)));
+        result.Reasons.AddRange (messages.Select(errorMessage => new Error (errorMessage)));
         return result;
     }
 
@@ -58,7 +58,7 @@ public partial class Result<TValue>
     public static new Result<TValue> Ok (string message)
     {
         var result = new Result<TValue> ();        
-        result.Reasons.Add (new Success ().WithMessage(message));
+        result.Reasons.Add (new Success (message));
         return result;
     }
     
@@ -71,7 +71,7 @@ public partial class Result<TValue>
     public static new Result<TValue> Fail (string message)
     {
         var result = new Result<TValue> ();        
-        result.Reasons.Add (new Error().WithMessage(message));
+        result.Reasons.Add (new Error(message));
         return result;
     }
 }
