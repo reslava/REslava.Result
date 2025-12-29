@@ -29,6 +29,13 @@ My idea is to make this library as simple as possible, easy to understand and us
 
 I hope you find this library useful. Thank you!
 
+## 📶 UML Class Diagram
+
+Here you can see UML class diagrama used to implement Result pattern in the project:
+
+[UML](UML.md)
+
+
 ## 📕 References
 - [Series: Working with the result pattern](https://andrewlock.net/series/working-with-the-result-pattern/)
 - [The Result Pattern in C#: A Smarter Way to Handle Errors](https://medium.com/@aseem2372005/the-result-pattern-in-c-a-smarter-way-to-handle-errors-c6dee28a0ef0)
