@@ -3,8 +3,10 @@ using REslava.Result;
 
 Console.WriteLine ("Hello, World!");
 
-var cs = new Success ("hola").WithMetadata("key", "value");
+var cs = new Success ("hola").WithTags("ErrorCode", 12);
+Console.WriteLine (cs.ToString ());
 
+cs = new Success ("");
 Result DoSomething ()
 {
 return Result.Fail ("Error ocurred");
@@ -23,6 +25,7 @@ var s = Result.Fail ("asdasd");
 var rv = Result<int>.Ok (33).WithSuccess ("correcto");
 
 rv = Result<float>.Ok ("a ver").WithValue (66);
+Console.WriteLine (rv.ToString());
 rv = Result<float>.Ok (77).WithValue (66);
 
 
@@ -71,6 +74,6 @@ public class DomainError : Error
     public DomainError (string message)   
     {
         WithMessage (message);
-        WithMetadata ("ErrorCode", "12");
+        WithTags ("ErrorCode", "12");
     }
 }

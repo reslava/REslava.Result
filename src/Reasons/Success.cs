@@ -4,4 +4,9 @@ public class Success : Reason<Success>, ISuccess
 {
     public Success () : base () { } 
     public Success (string message) : base (message) { }
+
+    public override string ToString ()
+    {
+        return base.ToString ();
+    }
 }

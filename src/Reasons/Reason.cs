@@ -3,11 +3,11 @@
 public abstract class Reason : IReason
 {
     public string Message { get; protected set; }
-    public Dictionary<string, object> Metadata { get; }
+    public Dictionary<string, object> Tags { get; }
 
     protected Reason ()
     {
-        Metadata = [];
+        Tags = [];
         Message = string.Empty;
     }
     public Reason (string message) : this ()
@@ -15,14 +15,23 @@ public abstract class Reason : IReason
         Message = message;
     }
     public IReason WithMessage (string message) { Message = message; return this; }
-    public IReason WithMetadata (string key, object value) { Metadata.Add (key, value); return this; }
-    public IReason WithMetadata (Dictionary<string, object> metadata)
+    public IReason WithTags (string key, object value) { Tags.Add (key, value); return this; }
+    public IReason WithTags (Dictionary<string, object> metadata)
     {
         foreach (var metadataItem in metadata)
-            Metadata.Add (metadataItem.Key, metadataItem.Value);
+            Tags.Add (metadataItem.Key, metadataItem.Value);
 
         return this;
     }
+
+    public override string ToString ()
+    {
+        var tagsString = Tags.Any () ?
+            $"{nameof (Tags)}: {string.Join (", ", Tags)}":
+            string.Empty;
+
+        return $"{GetType().Name}: {Message}{string.Join ("; ", Tags)}";            
+    }       
 }
 
 public abstract class Reason<TReason> : Reason

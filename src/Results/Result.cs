@@ -13,8 +13,8 @@ public partial class Result : IResult
         Reasons = [];
     }
     public IResult WithMessage (string message) 
-    {
-        Reasons.ElementAt(0).WithMessage(message);
+    {        
+        Reasons.First().WithMessage(message);
         return this; 
     }
     public IResult WithSuccess (string message) { Reasons.Add (new Success().WithMessage (message)); return this; }
@@ -22,7 +22,16 @@ public partial class Result : IResult
     public IResult WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange ((IReason)sucesses); return this; }
     public IResult WithError (string message) { Reasons.Add (new Error().WithMessage (message)); return this; }
     public IResult WithError (IError error) { Reasons.Add ((IReason)error); return this; }
-    public IResult WithErrors (IEnumerable<IError> errors) { Reasons.AddRange ((IReason)errors); return this; }    
+    public IResult WithErrors (IEnumerable<IError> errors) { Reasons.AddRange ((IReason)errors); return this; }
+
+    public override string ToString ()
+    {
+        var reasonsString = Reasons.Any ()
+                                ? $", Reasons='{string.Join ("; ", Reasons)}'"
+                                : string.Empty;
+
+        return $"Result: IsSuccess='{IsSuccess}'{reasonsString}";
+    }
 }
 
 public partial class Result<TValue> : Result, IResult<TValue>
@@ -47,4 +56,11 @@ public partial class Result<TValue> : Result, IResult<TValue>
             throw new InvalidOperationException ($"Result is in status failed. Value is not set.");
     }
     public IResult<TValue> WithValue (TValue value) { Value = value; return this; }
+
+    public override string ToString ()
+    {
+        var baseString = base.ToString ();
+        var valueString = $"{nameof (Value)} = {ValueOrDefault}";
+        return $"{baseString}, {valueString}";
+    }
 }

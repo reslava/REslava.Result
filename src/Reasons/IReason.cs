@@ -3,9 +3,9 @@
 public interface IReason
 {
     string Message { get; }
-    Dictionary<string, object> Metadata { get; }
+    Dictionary<string, object> Tags { get; }
 
     IReason WithMessage (string message);
-    IReason WithMetadata (string key, object value);
-    IReason WithMetadata (Dictionary<string, object> metadata);
+    IReason WithTags (string key, object value);
+    IReason WithTags (Dictionary<string, object> metadata);    
 }

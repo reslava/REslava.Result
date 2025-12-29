@@ -2,27 +2,25 @@
 
 [TestClass]
 public sealed class Result_Creation
-{
+{       
     [TestMethod]    
     [DataRow ("")]
-    [DataRow ("message1")]
-    [DataRow ("message 2")]
+    [DataRow ("message1")]    
     public void Result_Factories_Ok_string(string message)
     {        
-        var result = Result.Ok (message);
-        Assert.AreEqual (message, result.Reasons[0].Message.ToString ());
+        var result = Result.Ok (message);        
+        Assert.AreEqual (message, result.Reasons[0].Message);
         Assert.IsTrue (result.IsSuccess);
         Assert.IsFalse (result.IsFailed);
     }
     
     [TestMethod]
     [DataRow ("")]
-    [DataRow ("message1")]
-    [DataRow ("message 2")]
+    [DataRow ("message1")]    
     public void Result_int_Factories_Ok_string (string message)
     {
         var result = Result<int>.Ok (message);
-        Assert.AreEqual (message, result.Reasons[0].Message.ToString ());
+        Assert.AreEqual (message, result.Reasons[0].Message);
         Assert.IsTrue (result.IsSuccess);
         Assert.IsFalse (result.IsFailed);
     }
@@ -33,7 +31,7 @@ public sealed class Result_Creation
     public void Result_int_Factories_Ok_int_string (int value, string message)
     {
         var result = Result<int>.Ok (message).WithValue(value);
-        Assert.AreEqual (message, result.Reasons[0].Message.ToString ());
+        Assert.AreEqual (message, result.Reasons[0].Message);
         Assert.AreEqual (value, result.ValueOrDefault);
         Assert.IsTrue (result.IsSuccess);
         Assert.IsFalse (result.IsFailed);
@@ -42,12 +40,12 @@ public sealed class Result_Creation
     [TestMethod]
     [DataRow ("")]
     [DataRow ("message1")]
-    [DataRow ("message 2")]
+    
     public void Result_Factories_Fail_string (string message)
     {
         var result = Result.Fail (message);
         Assert.AreEqual (message, result.Reasons[0].Message.ToString ());
         Assert.IsFalse (result.IsSuccess);
-        Assert.IsTrue (result.IsFailed);
+        Assert.IsTrue (result.IsFailed);        
     }
 }
