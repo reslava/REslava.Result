@@ -1,3 +1,3 @@
 ﻿namespace REslava.Result;
 
-public interface ISuccess { };
+public interface ISuccess : IReason { };

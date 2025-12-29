@@ -1,3 +1,3 @@
 ﻿namespace REslava.Result;
 
-public interface IError { }
+public interface IError : IReason { }

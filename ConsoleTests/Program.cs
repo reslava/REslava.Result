@@ -3,7 +3,11 @@ using REslava.Result;
 
 Console.WriteLine ("Hello, World!");
 
-var cs = new Success ("hola").WithTags("ErrorCode", 12);
+var su = new Success ("test");
+
+Console.WriteLine (su.ToString ());
+
+var cs = new Success ("hola").WithTags("ErrorCode", 12).WithMessage("NUEVO");
 var res = Result.Ok ().WithSuccess(cs);
 Console.WriteLine (res.ToString ());
 

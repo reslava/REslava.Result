@@ -6,17 +6,7 @@ public interface IResult
     bool IsFailed { get; }
     List<IReason> Reasons { get; }
     IReadOnlyList<IError> Errors { get; }
-    IReadOnlyList<ISuccess> Successes { get; }
-
-    ////IResult WithReason (IReason reason);
-    ////IResult WithReasons (IEnumerable<IReason> reasons);
-
-    //IResult WithSuccess (string message);
-    //IResult WithSuccess (IReason success);    
-    //IResult WithSuccesses (IEnumerable<ISuccess> successes);
-    //IResult WithError (string message);
-    //IResult WithError (IError error);
-    //IResult WithErrors (IEnumerable<IError> errors);
+    IReadOnlyList<ISuccess> Successes { get; }    
 }
 
 public interface IResult <out TValue> : IResult

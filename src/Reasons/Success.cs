@@ -1,12 +1,7 @@
 ﻿namespace REslava.Result;
 
-public class Success : Reason<Success>, ISuccess
+public class Success : Reason<Success>
 {
-    public Success () : base () { } 
-    public Success (string message) : base (message) { }
-
-    public override string ToString ()
-    {
-        return base.ToString ();
-    }
+    public Success () : base () { }
+    public Success (string message) : base (message) { }    
 }

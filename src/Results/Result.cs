@@ -16,10 +16,12 @@ public partial class Result : IResult
     }
         
     public Result WithSuccess (string message) { Reasons.Add (new Success (message)); return this; }
-    public Result WithSuccess (IReason success) { Reasons.Add ((IReason)success); return this; }
-    public Result WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange ((IReason)sucesses); return this; }
     public Result WithError (string message) { Reasons.Add (new Error (message)); return this; }
-    public Result WithError (IError error) { Reasons.Add ((IReason)error); return this; }
+    public Result WithSuccess (Success success) { Reasons.Add ((IReason)success); return this; }
+    public Result WithError (Error error) { Reasons.Add ((IReason)error); return this; }
+    public Result WithSuccesses (IEnumerable<ISuccess> sucesses) { Reasons.AddRange ((IReason)sucesses); return this; }
+    
+    
     public Result WithErrors (IEnumerable<IError> errors) { Reasons.AddRange ((IReason)errors); return this; }
 
     public override string ToString ()
