@@ -93,7 +93,7 @@ resultFail = resultFail.WithError("error3");
 
 // NO DEBE COMPILAR resultFail = Result.Fail (new Success ("success1"));
 var dm = new DomainError ("domain");
-var rd = Result.Fail(dm).WithError(dm);
+var rd = Result.Fail(dm).WithError(dm).WithSuccess("su1").WithErrors([new Error("11"), new Error ("22")]);
 Console.WriteLine (rd.ToString ());
 
 public class DomainError : Error
