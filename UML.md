@@ -1,20 +1,20 @@
 ```mermaid
 classDiagram
-    class IReason {
+    class IReason:::interface {
         <<interface>>
         +string Message
         +Dictionary~string, object~ Tags
     }
     
-    class ISuccess {
+    class ISuccess:::interface {
         <<interface>>
     }
     
-    class IError {
+    class IError:::interface  {
         <<interface>>
     }
     
-    class IResult {
+    class IResult:::interface  {
         <<interface>>
         +bool IsSuccess
         +bool IsFailed
@@ -23,13 +23,13 @@ classDiagram
         +IReadOnlyList~ISuccess~ Successes
     }
     
-    class IResult_TValue {
+    class IResult_TValue:::interface  {
         <<interface>>
         +TValue? Value
         +TValue? ValueOrDefault
     }
     
-    class Reason {
+    class Reason:::abstract {
         <<abstract>>
         #string Message
         +Dictionary~string, object~ Tags
@@ -38,7 +38,7 @@ classDiagram
         +ToString() string
     }
     
-    class Reason_TReason {
+    class Reason_TReason:::abstract {
         <<abstract>>
         +Reason()
         +Reason(string message)
@@ -47,17 +47,17 @@ classDiagram
         +WithTags(Dictionary metadata) TReason
     }
     
-    class Success {
+    class Success:::concrete {
         +Success()
         +Success(string message)
     }
     
-    class Error {
+    class Error:::concrete {
         +Error()
         +Error(string message)
     }
     
-    class Result {
+    class Result:::concrete {
         +bool IsSuccess
         +bool IsFailed
         +List~IReason~ Reasons
@@ -73,7 +73,7 @@ classDiagram
         +ToString() string
     }
     
-    class Result_TValue {
+    class Result_TValue:::concrete {
         +TValue? ValueOrDefault
         +TValue? Value
         +Result()
@@ -99,3 +99,8 @@ classDiagram
     
     Result o-- IReason : contains
     Result_TValue o-- TValue : contains
+
+    classDef interface fill:#e1f5ff,stroke:#0288d1,stroke-width:2px,color:black
+    classDef abstract fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:black
+    classDef concrete fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:black
+    classDef type fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:black
