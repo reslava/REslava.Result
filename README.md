@@ -17,7 +17,7 @@
 - [Why Result Pattern?](#-why-result-pattern)
 - [Overview](#-overview)
 - [Architecture Highlights](#%EF%B8%8F-architecture-highlights)
-- [UML Class Diagrams](#uml-class-diagrams)
+- [UML Class Diagrams](#-uml-class-diagrams)
 - [Clean Design](#-clean-design)
 - [References](#-references)
 
