@@ -13,10 +13,10 @@
 </div>
 
 ## 📋 Table of Contents
-- [Introducing REslava.Result](#-introducing-reslava-result) 
+- [Introducing REslava.Result](#-introducing-reslavaresult) 
 - [Why Result Pattern?](#-why-result-pattern)
 - [Overview](#-overview)
-- [Architecture Highlights](#-architecture-highlights)
+- [Architecture Highlights](#%EF%B8%8F-architecture-highlights)
 - [UML Class Diagrams](#uml-class-diagrams)
 - [Clean Design](#-clean-design)
 - [References](#-references)
