@@ -21,15 +21,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REslava.Result.Tests", "tests\REslava.Result.Tests\REslava.Result.Tests.csproj", "{6EB24346-4374-4F27-B55B-80ACDBAC7369}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{53956695-5FA5-4639-A88A-808BEACD6211}"
-	ProjectSection(SolutionItems) = preProject
-		UML-simple.md = UML-simple.md
-		UML.md = UML.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{24EECD78-7ED4-4E0D-8FAB-54E2BD8799EE}"
 	ProjectSection(SolutionItems) = preProject
+		UML-simple.md = UML-simple.md
 		images\UML-simple.png = images\UML-simple.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{839C7B35-3C9F-4B66-AB69-F2AE6C6BADFC}"
+	ProjectSection(SolutionItems) = preProject
+		UML.md = UML.md
 	EndProjectSection
 EndProject
 Global
