@@ -1,7 +1,9 @@
 ```mermaid
 classDiagram
     class IReason {
-        <<interface>>        
+        <<interface>>
+        +string Message
+        +Dictionary~string, object~ Tags
     }
     
     class ISuccess {
@@ -13,35 +15,71 @@ classDiagram
     }
     
     class IResult {
-        <<interface>>        
-        +List~IReason~ Reasons        
+        <<interface>>
+        +bool IsSuccess
+        +bool IsFailed
+        +List~IReason~ Reasons
+        +IReadOnlyList~IError~ Errors
+        +IReadOnlyList~ISuccess~ Successes
     }
     
     class IResult_TValue {
         <<interface>>
-        +TValue? Value        
+        +TValue? Value
+        +TValue? ValueOrDefault
     }
     
     class Reason {
-        <<abstract>>        
+        <<abstract>>
+        #string Message
+        +Dictionary~string, object~ Tags
+        #Reason()
+        +Reason(string message)
+        +ToString() string
     }
     
     class Reason_TReason {
-        <<abstract>>        
+        <<abstract>>
+        +Reason()
+        +Reason(string message)
+        +WithMessage(string message) TReason
+        +WithTags(string key, object value) TReason
+        +WithTags(Dictionary metadata) TReason
     }
     
-    class Success {        
+    class Success {
+        +Success()
+        +Success(string message)
     }
     
-    class Error {        
+    class Error {
+        +Error()
+        +Error(string message)
     }
     
     class Result {
-        +List~IReason~ Reasons        
+        +bool IsSuccess
+        +bool IsFailed
+        +List~IReason~ Reasons
+        +IReadOnlyList~IError~ Errors
+        +IReadOnlyList~ISuccess~ Successes
+        +Result()
+        +WithSuccess(string message) Result
+        +WithError(string message) Result
+        +WithSuccess(Success success) Result
+        +WithError(Error error) Result
+        +WithSuccesses(IEnumerable successes) Result
+        +WithErrors(IEnumerable errors) Result
+        +ToString() string
     }
     
-    class Result_TValue {        
-        +TValue? Value        
+    class Result_TValue {
+        +TValue? ValueOrDefault
+        +TValue? Value
+        +Result()
+        -ThrowIfFailed()
+        +WithValue(TValue value) Result~TValue~
+        +ToString() string
     }
     
     IReason <|.. ISuccess : extends
