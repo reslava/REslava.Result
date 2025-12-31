@@ -33,8 +33,9 @@ I hope you find this library useful. Thank you!
 
 Here you can see UML class diagrama used to implement Result pattern in the project:
 
-- [UML](UML.md)
-- [UML simplified](UML-simple.md) (only class names)
+- [UML](docs/UML.md)
+- [UML simplified](docs/UML-simple.md) (only class names)
+![UML simplified](images/UML-simple.png)
 
 
 ## 📕 References
