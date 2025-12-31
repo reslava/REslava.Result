@@ -17,6 +17,7 @@
 
 ## 📋 Table of Contents
 - [Overview](#-overview)
+- [UML Class Diagrams](#uml-class-diagrams)
 - [References](#-references)
 
 ## 🎯 Overview
@@ -29,7 +30,7 @@ My idea is to make this library as simple as possible, easy to understand and us
 
 I hope you find this library useful. Thank you!
 
-## 📶 UML Class Diagram
+## 📶 UML Class Diagrams
 
 Here you can see UML class diagrama used to implement Result pattern in the project:
 
