@@ -16,23 +16,11 @@
     "changelog": false
   },
   "bumpFiles": [
-    {
-      "filename": "package.json",
-      "type": "json"
-    },
-    {
-      "filename": "src/REslava.Result.csproj",
-      "updater": "standard-version-updater-csproj.js"
-    }
+    "package.json",
+    "src/REslava.Result.csproj"
   ],
   "packageFiles": [
-    {
-      "filename": "package.json",
-      "type": "json"
-    },
-    {
-      "filename": "src/REslava.Result.csproj",
-      "updater": "standard-version-updater-csproj.js"
-    }
+    "package.json",
+    "src/REslava.Result.csproj"
   ]
 }
