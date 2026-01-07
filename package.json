@@ -9,19 +9,19 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "release": "standard-version",
-    "release:beta": "standard-version --prerelease beta",
-    "release:minor": "standard-version --release-as minor",
-    "release:major": "standard-version --release-as major",
-    "release:dry": "standard-version --dry-run"
+    "release": "commit-and-tag-version",
+    "release:beta": "commit-and-tag-version --prerelease beta",
+    "release:minor": "commit-and-tag-version --release-as minor",
+    "release:major": "commit-and-tag-version --release-as major",
+    "release:dry": "commit-and-tag-version --dry-run"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
+    "commit-and-tag-version": "^12.6.1",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^8.0.3",
-    "standard-version": "^9.5.0"
+    "husky": "^8.0.3"
   },
   "config": {
     "commitizen": {
