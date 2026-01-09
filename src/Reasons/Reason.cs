@@ -36,7 +36,9 @@ public abstract class Reason<TReason> : Reason
     public TReason WithTags(Dictionary<string, object> metadata)
     {
         foreach (var metadataItem in metadata)
+        { 
             Tags.Add (metadataItem.Key, metadataItem.Value);
+        }
 
         return (TReason)this;
     }

@@ -31,9 +31,13 @@ public partial class Result : IResult
         ArgumentNullException.ThrowIfNull(onFailure);
 
         if (IsSuccess)
+        { 
             onSuccess();
+        }
         else
+        { 
             onFailure(Errors);
+        }
     }
 }
 
@@ -65,8 +69,12 @@ public partial class Result<TValue> : Result, IResult<TValue>
         ArgumentNullException.ThrowIfNull(onFailure);
 
         if (IsSuccess)
+        { 
             onSuccess(ValueOrDefault!);
+        }
         else
+        { 
             onFailure(Errors);
+        }
     }
 }

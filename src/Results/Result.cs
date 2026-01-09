@@ -52,7 +52,9 @@ public partial class Result<TValue> : Result, IResult<TValue>
     private void ThrowIfFailed()
     {
         if (IsFailed)
+        { 
             throw new InvalidOperationException($"Result is in status failed. Value is not set.");
+        }
     }
     public Result<TValue> WithValue(TValue value) { Value = value; return this; }
 
