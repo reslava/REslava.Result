@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.1](https://github.com/reslava/nuget-package-reslava-result/compare/v0.4.0...v0.4.1) (2026-01-10)
+
+
+### ✅ Tests
+
+* **result:** cleaning warnings new assert methods ([acb79d6](https://github.com/reslava/nuget-package-reslava-result/commit/acb79d637cf685f7ed0496bd3f31a1209477276f))
+* **result:** tests for result and result-tvalue ([437277a](https://github.com/reslava/nuget-package-reslava-result/commit/437277ac30d24a8bc6ae3476347e77a956515f30))
+
 ## [0.4.0](https://github.com/reslava/nuget-package-reslava-result/compare/v0.3.1...v0.4.0) (2026-01-10)
 
 
