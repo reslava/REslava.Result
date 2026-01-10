@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace REslava.Result.Tests;
 
 /// <summary>
@@ -21,9 +17,9 @@ public sealed class ResultTests
         // Assert
         Assert.IsTrue(result.IsSuccess);
         Assert.IsFalse(result.IsFailed);
-        Assert.AreEqual(0, result.Reasons.Count);
-        Assert.AreEqual(0, result.Errors.Count);
-        Assert.AreEqual(0, result.Successes.Count);
+        Assert.IsEmpty(result.Reasons);
+        Assert.IsEmpty(result.Errors);
+        Assert.IsEmpty(result.Successes);
     }
 
     #endregion
@@ -39,7 +35,7 @@ public sealed class ResultTests
         // Assert
         Assert.IsFalse(result.IsSuccess);
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(1, result.Errors);
         Assert.AreEqual("Error message", result.Errors[0].Message);
     }
 
@@ -54,7 +50,7 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(1, result.Errors);
         Assert.AreEqual("Custom error", result.Errors[0].Message);
     }
 
@@ -69,7 +65,7 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(3, result.Errors.Count);
+        Assert.HasCount(3, result.Errors);
         Assert.AreEqual("Error 1", result.Errors[0].Message);
         Assert.AreEqual("Error 2", result.Errors[1].Message);
         Assert.AreEqual("Error 3", result.Errors[2].Message);
@@ -86,7 +82,7 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(2, result.Errors.Count);
+        Assert.HasCount(2, result.Errors);
     }
 
     [TestMethod]
@@ -132,7 +128,7 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsSuccess);
-        Assert.AreEqual(1, result.Successes.Count);
+        Assert.HasCount(1, result.Successes);
         Assert.AreEqual("Operation completed", result.Successes[0].Message);
     }
 
@@ -147,7 +143,7 @@ public sealed class ResultTests
         result.WithSuccess(success);
 
         // Assert
-        Assert.AreEqual(1, result.Successes.Count);
+        Assert.HasCount(1, result.Successes);
         Assert.AreEqual("Custom success", result.Successes[0].Message);
     }
 
@@ -162,7 +158,7 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(1, result.Errors);
         Assert.AreEqual("Validation failed", result.Errors[0].Message);
     }
 
@@ -178,7 +174,7 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(1, result.Errors);
     }
 
     [TestMethod]
@@ -192,7 +188,7 @@ public sealed class ResultTests
         result.WithSuccesses(successes);
 
         // Assert
-        Assert.AreEqual(2, result.Successes.Count);
+        Assert.HasCount(2, result.Successes);
     }
 
     [TestMethod]
@@ -207,7 +203,7 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(2, result.Errors.Count);
+        Assert.HasCount(2, result.Errors);
     }
 
     [TestMethod]
@@ -221,8 +217,8 @@ public sealed class ResultTests
 
         // Assert
         Assert.IsTrue(result.IsFailed); // Has error
-        Assert.AreEqual(2, result.Successes.Count);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(2, result.Successes);
+        Assert.HasCount(1, result.Errors);
     }
 
     #endregion
@@ -335,7 +331,7 @@ public sealed class ResultTests
         var str = result.ToString();
 
         // Assert
-        Assert.IsTrue(str.Contains("IsSuccess='True'"));
+        Assert.Contains("IsSuccess='True'", str);
     }
 
     [TestMethod]
@@ -348,8 +344,8 @@ public sealed class ResultTests
         var str = result.ToString();
 
         // Assert
-        Assert.IsTrue(str.Contains("IsSuccess='False'"));
-        Assert.IsTrue(str.Contains("Test error"));
+        Assert.Contains("IsSuccess='False'", str);
+        Assert.Contains("Test error", str);
     }
 
     #endregion

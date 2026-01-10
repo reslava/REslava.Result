@@ -1,7 +1,7 @@
 namespace REslava.Result.Tests;
 
 /// <summary>
-/// Comprehensive tests for the Result<TValue> class (generic)
+/// Comprehensive tests for the Result_TValue class (generic)
 /// </summary>
 [TestClass]
 public sealed class ResultTValueTests
@@ -44,7 +44,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(result.IsSuccess);
-        Assert.AreEqual("John", result.Value.Name);
+        Assert.AreEqual("John", result.Value!.Name);
         Assert.AreEqual(30, result.Value.Age);
     }
 
@@ -61,7 +61,7 @@ public sealed class ResultTValueTests
         // Assert
         Assert.IsFalse(result.IsSuccess);
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(1, result.Errors);
         Assert.AreEqual("Error occurred", result.Errors[0].Message);
     }
 
@@ -76,7 +76,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(1, result.Errors);
     }
 
     [TestMethod]
@@ -89,7 +89,7 @@ public sealed class ResultTValueTests
         var result = Result<int>.Fail(messages);
 
         // Assert
-        Assert.AreEqual(2, result.Errors.Count);
+        Assert.HasCount(2, result.Errors);
     }
 
     [TestMethod]
@@ -102,7 +102,7 @@ public sealed class ResultTValueTests
         var result = Result<int>.Fail(errors);
 
         // Assert
-        Assert.AreEqual(2, result.Errors.Count);
+        Assert.HasCount(2, result.Errors);
     }
 
     #endregion
@@ -120,7 +120,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(typedResult.IsFailed);
-        Assert.AreEqual(1, typedResult.Errors.Count);
+        Assert.HasCount(1, typedResult.Errors);
         Assert.AreEqual("Validation error", typedResult.Errors[0].Message);
     }
 
@@ -209,7 +209,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsInstanceOfType<Result<int>>(newResult);
-        Assert.AreEqual(1, newResult.Successes.Count);
+        Assert.HasCount(1, newResult.Successes);
         Assert.AreEqual(10, newResult.Value);
     }
 
@@ -225,7 +225,7 @@ public sealed class ResultTValueTests
         // Assert
         Assert.IsInstanceOfType<Result<int>>(newResult);
         Assert.IsTrue(newResult.IsFailed);
-        Assert.AreEqual(1, newResult.Errors.Count);
+        Assert.HasCount(1, newResult.Errors);
     }
 
     [TestMethod]
@@ -240,8 +240,8 @@ public sealed class ResultTValueTests
         // Assert
         Assert.IsInstanceOfType<Result<string>>(result);
         Assert.AreEqual("test", result.ValueOrDefault);
-        Assert.AreEqual(2, result.Successes.Count);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(2, result.Successes);
+        Assert.HasCount(1, result.Errors);
     }
 
     #endregion
@@ -315,7 +315,7 @@ public sealed class ResultTValueTests
         );
 
         // Assert
-        Assert.AreEqual(1, errorMessages.Count);
+        Assert.HasCount(1, errorMessages);
         Assert.AreEqual("Error", errorMessages[0]);
     }
 
@@ -385,7 +385,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(mapped.IsFailed);
-        Assert.AreEqual(1, mapped.Errors.Count);
+        Assert.HasCount(1, mapped.Errors);
         Assert.AreEqual("Original error", mapped.Errors[0].Message);
     }
 
@@ -488,7 +488,7 @@ public sealed class ResultTValueTests
         var bound = result.Bind(x => Result<string>.Ok(x.ToString()));
 
         // Assert
-        Assert.IsTrue(bound.IsFailed);        
+        Assert.IsTrue(bound.IsFailed);
         Assert.HasCount(1, bound.Errors);
         Assert.AreEqual("Original error", bound.Errors[0].Message);
     }
@@ -519,7 +519,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(bound.IsSuccess);
-        Assert.AreEqual(2, bound.Successes.Count);
+        Assert.HasCount(2, bound.Successes);
         Assert.IsTrue(bound.Successes.Any(s => s.Message == "Step 1 done"));
         Assert.IsTrue(bound.Successes.Any(s => s.Message == "Step 2 done"));
     }
@@ -599,7 +599,7 @@ public sealed class ResultTValueTests
         // Act
         var str = result.ToString();
 
-        // Assert        
+        // Assert
         Assert.Contains("IsSuccess='True'", str);
         Assert.Contains("Value = 42", str);
     }
@@ -614,8 +614,8 @@ public sealed class ResultTValueTests
         var str = result.ToString();
 
         // Assert
-        Assert.IsTrue(str.Contains("IsSuccess='False'"));
-        Assert.IsTrue(str.Contains("Test error"));
+        Assert.Contains("IsSuccess='False'", str);
+        Assert.Contains("Test error", str);
     }
 
     #endregion
@@ -637,7 +637,7 @@ public sealed class ResultTValueTests
         Assert.IsTrue(result.IsSuccess);
         Assert.AreEqual("Value: 20", result.Value);
         // Bind preserves successes: "Created" from original + "Doubled" from first Bind + "Formatted" from second Bind
-        Assert.AreEqual(3, result.Successes.Count);
+        Assert.HasCount(3, result.Successes);
         Assert.IsTrue(result.Successes.Any(s => s.Message == "Created"));
         Assert.IsTrue(result.Successes.Any(s => s.Message == "Doubled"));
         Assert.IsTrue(result.Successes.Any(s => s.Message == "Formatted"));
@@ -654,7 +654,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(result.IsFailed);
-        Assert.AreEqual(1, result.Errors.Count);
+        Assert.HasCount(1, result.Errors);
         Assert.AreEqual("Processing failed", result.Errors[0].Message);
     }
 
