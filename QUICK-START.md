@@ -22,8 +22,9 @@ We use a simplified Git Flow for solo development:
 ### Branch Structure
 ```
 main        → Production releases only (v1.0.0, v1.1.0, etc.)
-dev         → Active development (merge feature branches here)
+dev         → Active development, docs (merge feature branches here)
 feature/*   → Individual features (branch from dev)
+test/*      → Individual tests (branch from tests)
 fix/*       → Bug fixes (branch from dev)
 hotfix/*    → Critical production fixes (branch from main)
 ```
@@ -31,8 +32,9 @@ hotfix/*    → Critical production fixes (branch from main)
 ### Branch Rules
 
 - **main**: Only merge from dev when ready to release
-- **dev**: Default working branch, always stable enough to test
+- **dev**: Default working branch, always stable enough to test. Docs.
 - **feature/**: Create for each new feature
+- **test/**: Create for each new test
 - **fix/**: Create for each bug fix
 - **hotfix/**: Emergency fixes for production issues
 
@@ -158,7 +160,7 @@ $ npm run commit
 | `feat` | New features | feature/* | `feat(Result): add Map method` |
 | `fix` | Bug fixes | fix/* | `fix(Result): handle null in Bind` |
 | `docs` | Documentation | any | `docs(README): add usage examples` |
-| `test` | Tests | feature/*, fix/* | `test(Map): add Map method tests` |
+| `test` | Tests | test/* | `test(Map): add Map method tests` |
 | `refactor` | Code improvements | feature/* | `refactor(Result): simplify error handling` |
 
 ### Secondary Types
