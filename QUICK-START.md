@@ -34,6 +34,7 @@ hotfix/*    → Critical production fixes (branch from main)
 - **dev**: Default working branch, always stable enough to test
 - **feature/**: Create for each new feature
 - **fix/**: Create for each bug fix
+- **hotfix/**: Emergency fixes for production issues
 
 ---
 
@@ -86,13 +87,15 @@ git pull origin main
 git merge dev
 
 # 3. Create release (see "Creating Releases" section)
-npm run release:beta  # or release, release:minor, etc.
+npm run release:minor  # or release, release:beta, etc.
 
 # 4. Push everything
 git push origin main --follow-tags
 
 # 5. Go back to dev for next work
 git checkout dev
+git merge main  # Sync dev with main
+git push origin dev
 ```
 
 ---
@@ -123,7 +126,7 @@ When you run `npm run commit`, you'll see:
 **Follow these steps:**
 
 1. **Select Type**: Use arrow keys, press Enter
-2. **Scope** (optional): Type scope (e.g., "Result", "Factory") or press Enter
+2. **Scope** (optional): Type scope (e.g., "Result", "Reason") or press Enter
 3. **Short Description**: Brief description (e.g., "add Map method")
 4. **Long Description** (optional): Press Enter to skip
 5. **Breaking Changes**: Type "N" (or "Y" if backward incompatible)
@@ -164,9 +167,21 @@ $ npm run commit
 |------|-------------|---------|
 | `perf` | Performance | `perf(Result): optimize Bind` |
 | `style` | Formatting | `style: fix indentation` |
-| `build` | Build system | `build: update .NET SDK` |
+| `build` | Build system | `build: update .NET SDK to 10.0` |
 | `ci` | CI/CD | `ci: add coverage workflow` |
 | `chore` | Maintenance | `chore: update gitignore` |
+
+### Common Scopes
+
+Use these scopes for consistency:
+
+- `Result` - Core Result class changes
+- `Reason` - Reason/Error/Success classes
+- `Factory` - Factory methods
+- `Extensions` - Extension methods
+- `Tests` - Test-related changes
+- `README` - README documentation
+- `Docs` - Other documentation
 
 ---
 
@@ -175,6 +190,7 @@ $ npm run commit
 ### Release Workflow
 
 Releases happen from the **main** branch only.
+
 ```bash
 # 1. Ensure you're on main with latest code
 git checkout main
@@ -184,9 +200,10 @@ git pull origin main
 npm run release:dry
 
 # 3. Review what would change:
-#    - Version bump (0.1.0 → 0.2.0)
+#    - Version bump (0.3.0 → 0.4.0)
 #    - CHANGELOG.md entries
-#    - Git tag (v0.2.0)
+#    - Git tag (v0.4.0)
+#    - Updates to package.json AND src/REslava.Result.csproj
 
 # 4. If preview looks good, create the release
 npm run release:minor  # or :beta, or :major
@@ -212,18 +229,18 @@ git push origin dev
 # Preview what would happen (safe - doesn't change anything)
 npm run release:dry
 
-# Create beta release (0.1.0-beta.0, 0.1.0-beta.1, etc.)
+# Create beta release (0.3.0-beta.0, 0.3.0-beta.1, etc.)
 npm run release:beta
 
-# Create patch release (0.1.0 → 0.1.1)
+# Create patch release (0.3.0 → 0.3.1)
 # Use for bug fixes only
 npm run release
 
-# Create minor release (0.1.0 → 0.2.0)
+# Create minor release (0.3.0 → 0.4.0)
 # Use for new features (backward compatible)
 npm run release:minor
 
-# Create major release (0.1.0 → 1.0.0)
+# Create major release (0.3.0 → 1.0.0)
 # Use for breaking changes
 npm run release:major
 ```
@@ -242,8 +259,8 @@ Version: MAJOR.MINOR.PATCH-PRERELEASE
 ```
 
 **Examples:**
-- `0.1.0` → `0.1.1`: Fixed bugs (PATCH)
-- `0.1.0` → `0.2.0`: Added features (MINOR)
+- `0.3.0` → `0.3.1`: Fixed bugs (PATCH)
+- `0.3.0` → `0.4.0`: Added features (MINOR)
 - `0.9.0` → `1.0.0`: First stable release (MAJOR)
 - `1.0.0` → `2.0.0`: Breaking changes (MAJOR)
 
@@ -286,20 +303,20 @@ git checkout -b feature/add-validation
 # ... write code in src/Extensions/ValidationExtensions.cs ...
 
 # 4. Write tests
-# ... write tests in tests/ValidationExtensions_Tests.cs ...
+# ... write tests in tests/REslava.Result.Tests/ValidationExtensions_Tests.cs ...
 
 # 5. Commit feature code
 git add src/Extensions/ValidationExtensions.cs
 npm run commit
 # Type: feat
-# Scope: Validation
-# Description: add Ensure and EnsureNotNull methods
+# Scope: Extensions
+# Description: add Ensure and EnsureNotNull validation methods
 
 # 6. Commit tests
-git add tests/ValidationExtensions_Tests.cs
+git add tests/REslava.Result.Tests/ValidationExtensions_Tests.cs
 npm run commit
 # Type: test
-# Scope: Validation
+# Scope: Extensions
 # Description: add validation extension tests
 
 # 7. Update documentation
@@ -331,10 +348,10 @@ git checkout -b fix/bind-null-handling
 # ... edit src/Results/Result.Bind.cs ...
 
 # 3. Add regression test
-# ... add test to tests/Result_Bind.cs ...
+# ... add test to tests/REslava.Result.Tests/Result_Bind_Tests.cs ...
 
 # 4. Commit fix
-git add src/Results/Result.Bind.cs tests/Result_Bind.cs
+git add src/Results/Result.Bind.cs tests/REslava.Result.Tests/Result_Bind_Tests.cs
 npm run commit
 # Type: fix
 # Scope: Result
@@ -403,13 +420,15 @@ git merge dev
 npm run release:dry
 
 # Expected output:
-# ✔ bumping version in package.json from 0.1.0 to 0.2.0
+# ✔ bumping version in package.json from 0.3.0 to 0.4.0
+# ✔ bumping version in src/REslava.Result.csproj from 0.3.0 to 0.4.0
 # ✔ outputting changes to CHANGELOG.md
-# ✔ committing package.json and CHANGELOG.md
-# ✔ tagging release v0.2.0
+# ✔ committing package.json, src/REslava.Result.csproj and CHANGELOG.md
+# ✔ tagging release v0.4.0
 
 # 4. Review what would change
 git diff HEAD package.json  # Check version
+git diff HEAD src/REslava.Result.csproj  # Check .csproj version
 # Review CHANGELOG preview in output
 
 # 5. If good, create release
@@ -425,7 +444,7 @@ git push --follow-tags
 # 8. Create GitHub Release
 # - Go to Releases page
 # - Click "Draft a new release"
-# - Select tag v0.2.0
+# - Select tag v0.4.0
 # - Copy changelog
 # - Publish
 
@@ -490,6 +509,18 @@ git commit
 git push origin dev
 ```
 
+### Problem: Release created wrong version
+```bash
+# If you haven't pushed yet
+git reset --hard HEAD~1  # Remove release commit
+git tag -d v0.4.0        # Remove tag
+npm run release:dry      # Review again
+npm run release:minor    # Create correct release
+
+# If you already pushed
+# Contact repository maintainer or create new release
+```
+
 ---
 
 ## 💡 Tips & Best Practices
@@ -497,39 +528,42 @@ git push origin dev
 ### ✅ DO
 
 1. **Always work on feature branches**
-```bash
+   ```bash
    git checkout -b feature/my-feature
-```
+   ```
 
 2. **Keep dev stable**
    - Test before merging to dev
    - Dev should always build and pass tests
 
 3. **Use descriptive branch names**
-```
+   ```
    ✅ feature/add-async-support
    ✅ fix/null-reference-in-bind
    ❌ my-branch
    ❌ temp
-```
+   ```
 
 4. **Commit often, push regularly**
-```bash
+   ```bash
    # Small, focused commits
    git add src/Results/Result.Map.cs
    npm run commit
-```
+   ```
 
 5. **Preview releases before creating**
-```bash
+   ```bash
    npm run release:dry  # Always do this first!
-```
+   ```
 
 6. **Test before releasing**
-```bash
+   ```bash
    dotnet build
    dotnet test
-```
+   ```
+
+7. **Use consistent scopes**
+   - Result, Reason, Factory, Extensions, Tests, README, Docs
 
 ### ❌ DON'T
 
@@ -542,23 +576,30 @@ git push origin dev
    - Use `npm run commit` instead
 
 3. **Don't mix multiple features in one branch**
-```
+   ```
    ❌ feature/add-map-bind-match  # Too many things
    ✅ feature/add-map            # One feature
    ✅ feature/add-bind           # One feature
    ✅ feature/add-match          # One feature
-```
+   ```
 
 4. **Don't forget to pull before creating branches**
-```bash
+   ```bash
    git checkout dev
    git pull origin dev  # ← Don't forget this!
    git checkout -b feature/new-feature
-```
+   ```
 
 5. **Don't release without testing**
    - Always build and test first
    - Check `npm run release:dry` output
+
+6. **Don't forget to sync dev after releases**
+   ```bash
+   git checkout dev
+   git merge main  # ← Don't forget this!
+   git push origin dev
+   ```
 
 ---
 
@@ -584,6 +625,7 @@ npm run release:minor               # Create release
 git push --follow-tags              # Push with tags
 git checkout dev                    # Back to dev
 git merge main                      # Sync dev with main
+git push origin dev                 # Push dev
 
 # Viewing
 git log --oneline --graph           # View history
@@ -594,10 +636,10 @@ git branch                          # List branches
 ### Release Commands
 ```bash
 npm run release:dry        # Preview (safe, no changes)
-npm run release:beta       # Beta: 0.1.0-beta.0
-npm run release            # Patch: 0.1.0 → 0.1.1
-npm run release:minor      # Minor: 0.1.0 → 0.2.0
-npm run release:major      # Major: 0.1.0 → 1.0.0
+npm run release:beta       # Beta: 0.3.0-beta.0
+npm run release            # Patch: 0.3.0 → 0.3.1
+npm run release:minor      # Minor: 0.3.0 → 0.4.0
+npm run release:major      # Major: 0.3.0 → 1.0.0
 ```
 
 ### Branch Commands
@@ -637,6 +679,9 @@ A:
 
 **Q: Can I work directly on dev for small changes?**
 A: Yes! For tiny changes (typos, small fixes), committing directly to dev is fine.
+
+**Q: Why does the release update both package.json and .csproj?**
+A: The versioning system keeps both files in sync automatically for consistency.
 
 ---
 
@@ -681,12 +726,14 @@ You now know:
 - Work on feature branches
 - Merge to dev frequently
 - Release from main
-- Always use `npm run commit`!
+- Always use `npm run commit`
+- Sync dev after releases!
 
 Happy coding! 🚀
 
 ---
 
-*Last updated: 2026-01-08*
+*Last updated: 2026-01-10*
 *Using: commit-and-tag-version for releases*
 *Branch strategy: Git Flow (main + dev)*
+*Current version: 0.3.0*
