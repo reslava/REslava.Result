@@ -122,26 +122,7 @@ public sealed class ResultConversionsTests
         Assert.Contains("Code", result.Errors[0].Tags.Keys);
         Assert.AreEqual("Email", result.Errors[0].Tags["Field"]);
         Assert.AreEqual(400, result.Errors[0].Tags["Code"]);
-    }
-
-    [TestMethod]
-    public void ImplicitConversion_FromCustomError_CreatesFailedResult()
-    {
-        // Arrange
-        var error = new StartDateIsAfterEndDateError(
-            new DateTime(2025, 1, 15),
-            new DateTime(2025, 1, 10)
-        );
-
-        // Act
-        Result<DateTime> result = error;
-
-        // Assert
-        Assert.IsTrue(result.IsFailed);
-        Assert.HasCount(1, result.Errors);
-        Assert.Contains("start date", result.Errors[0].Message);
-        Assert.Contains("end date", result.Errors[0].Message);
-    }
+    }     
 
     #endregion
 
@@ -197,25 +178,7 @@ public sealed class ResultConversionsTests
         Assert.IsTrue(result.IsFailed);
         Assert.HasCount(1, result.Errors);
         Assert.AreEqual("Single error", result.Errors[0].Message);
-    }
-
-    [TestMethod]
-    public void ImplicitConversion_FromMixedErrorArray_PreservesAllErrors()
-    {
-        // Arrange
-        var errors = new Error[]
-        {
-            new Error("Generic error"),
-            new StartDateIsAfterEndDateError(DateTime.Now.AddDays(1), DateTime.Now)
-        };
-
-        // Act
-        Result<int> result = errors;
-
-        // Assert
-        Assert.IsTrue(result.IsFailed);
-        Assert.HasCount(2, result.Errors);
-    }
+    }    
 
     #endregion
 

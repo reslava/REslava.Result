@@ -64,7 +64,7 @@ public partial class Result<TValue> : Result, IResult<TValue>
         return result;
     }
     
-    public static Result<TValue> From(Result result)
+    public static Result<TValue> FromResult(Result result)
     {
         ArgumentNullException.ThrowIfNull(result);
 
@@ -83,21 +83,21 @@ public partial class Result<TValue> : Result, IResult<TValue>
     
     public static new Result<TValue> Fail(string message)
     {     
-        return Result<TValue>.From(Result.Fail(message));
+        return Result<TValue>.FromResult(Result.Fail(message));
     }
 
     public static new Result<TValue> Fail(Error error)
     {
-        return Result<TValue>.From(Result.Fail(error));
+        return Result<TValue>.FromResult(Result.Fail(error));
     }
 
     public static new Result<TValue> Fail(IEnumerable<string> messages)
     {
-        return Result<TValue>.From(Result.Fail(messages));
+        return Result<TValue>.FromResult(Result.Fail(messages));
     }
 
     public static new Result<TValue> Fail(IEnumerable<Error> errors)
     {
-        return Result<TValue>.From(Result.Fail(errors));
+        return Result<TValue>.FromResult(Result.Fail(errors));
     }
 }

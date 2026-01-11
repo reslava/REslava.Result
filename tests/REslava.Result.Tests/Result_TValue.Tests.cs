@@ -116,7 +116,7 @@ public sealed class ResultTValueTests
         var baseResult = Result.Fail("Validation error");
 
         // Act
-        var typedResult = Result<int>.From(baseResult);
+        var typedResult = Result<int>.FromResult(baseResult);
 
         // Assert
         Assert.IsTrue(typedResult.IsFailed);
@@ -131,14 +131,14 @@ public sealed class ResultTValueTests
         var baseResult = Result.Ok();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(() => Result<int>.From(baseResult));
+        Assert.Throws<InvalidOperationException>(() => Result<int>.FromResult(baseResult));
     }
 
     [TestMethod]
     public void From_WithNull_ThrowsArgumentNullException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => Result<int>.From(null!));
+        Assert.Throws<ArgumentNullException>(() => Result<int>.FromResult(null!));
     }
 
     #endregion
@@ -410,7 +410,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(mapped.IsFailed);
-        Assert.IsTrue(mapped.Errors.Any(e => e.Message.Contains("Exception")));
+        Assert.IsTrue(mapped.Errors.Any(e => e.GetType().Equals(typeof(ExceptionError))));        
         Assert.IsTrue(mapped.Errors.Any(e => e.Message.Contains("Mapper failed")));
     }
 
@@ -545,7 +545,7 @@ public sealed class ResultTValueTests
 
         // Assert
         Assert.IsTrue(bound.IsFailed);
-        Assert.IsTrue(bound.Errors.Any(e => e.Message.Contains("Exception")));
+        Assert.IsTrue(bound.Errors.Any(e => e.GetType().Equals(typeof(ExceptionError))));
     }
 
     [TestMethod]
