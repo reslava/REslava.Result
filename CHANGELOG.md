@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.3](https://github.com/reslava/nuget-package-reslava-result/compare/v0.4.2...v0.4.3) (2026-01-11)
+
+
+### 🐛 Bug Fixes
+
+* **reason:** exception error now use CRTP. test: reasons ([dd3e053](https://github.com/reslava/nuget-package-reslava-result/commit/dd3e05358142adfe6329e9ec66209d160fadfff1))
+
 ## [0.4.2](https://github.com/reslava/nuget-package-reslava-result/compare/v0.4.1...v0.4.2) (2026-01-11)
 
 
