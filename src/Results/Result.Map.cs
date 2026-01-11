@@ -6,15 +6,15 @@ using System.Text;
 
 namespace REslava.Result;
 
-/// <summary>
-/// Transform the value of a succeful result using a specific mapper function.
-/// If the result is failed return a new error with the same reasons.
-/// </summary>
-/// <typeparam name="TOut">The type of the output value.</typeparam>
-/// <param name="mapper">The function to convert the value.</param>
-/// <returns>A new result of transformed value or the original errors</returns>
 public partial class Result<TValue> : Result, IResult<TValue>
 {
+    /// <summary>
+    /// Transform the value of a succeful result using a specific mapper function.
+    /// If the result is failed return a new error with the same reasons.
+    /// </summary>
+    /// <typeparam name="TOut">The type of the output value.</typeparam>
+    /// <param name="mapper">The function to convert the value.</param>
+    /// <returns>A new result of transformed value or the original errors</returns>
     public Result<TOut> Map<TOut>(Func<TValue, TOut> mapper)
     {
         if (mapper is null)
@@ -38,9 +38,39 @@ public partial class Result<TValue> : Result, IResult<TValue>
             return result;
         }
         catch (Exception ex)
+        {            
+            return Result<TOut>.Fail(new ExceptionError(ex));
+        }
+    }
+    
+    /// <summary>
+    /// Asynchronously transform the value of a succeful result using a specific mapper function.
+    /// If the result is failed return a new error with the same reasons.
+    /// </summary>
+    /// <typeparam name="TOut">The type of the output value.</typeparam>
+    /// <param name="mapper">The function to convert the value.</param>
+    /// <returns>A new result of transformed value or the original errors</returns>
+    public async Task<Result<TOut>> MapAsync<TOut>(Func<TValue, Task<TOut>> mapper)
+    {
+        ArgumentNullException.ThrowIfNull(mapper);
+
+        if (IsFailed)
         {
-            // TODO: Class ExceptionError
-            return Result<TOut>.Fail($"Exception: {ex.Message}");
+            var failedResult = new Result<TOut>();
+            failedResult.Reasons.AddRange(Reasons);
+            return failedResult;
+        }
+
+        try
+        {
+            var mappedValue = await mapper(Value!);
+            var successResult = Result<TOut>.Ok(mappedValue);
+            successResult.Reasons.AddRange(Successes);
+            return successResult;
+        }
+        catch (Exception ex)
+        {
+            return Result<TOut>.Fail(new ExceptionError(ex));
         }
     }
 }
