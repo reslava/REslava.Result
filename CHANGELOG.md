@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.2](https://github.com/reslava/nuget-package-reslava-result/compare/v0.4.1...v0.4.2) (2026-01-11)
+
+
+### ✨ Features
+
+* **result:** implicit conversion methods ([5e45549](https://github.com/reslava/nuget-package-reslava-result/commit/5e45549db9232f20b057c162592f28660e08b4d3))
+* **result:** map bind async, exception-error ([2ebf766](https://github.com/reslava/nuget-package-reslava-result/commit/2ebf766416dc024b2a255b20c5f0645709ee3f51))
+
+
+### ✅ Tests
+
+* **result:** update with new mstest assert methods ([02e0dc7](https://github.com/reslava/nuget-package-reslava-result/commit/02e0dc74abdb8c317474da999119974b1689459c))
+
 ## [0.4.1](https://github.com/reslava/nuget-package-reslava-result/compare/v0.4.0...v0.4.1) (2026-01-10)
 
 
